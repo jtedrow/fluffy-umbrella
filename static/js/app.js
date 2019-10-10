@@ -1,11 +1,31 @@
-var data = [
-    {
-        x: ['giraffes', 'orangutans', 'monkeys'],
-        y: [20, 14, 23],
+d3.json("/summary/").then((data) => {
+    console.log(data.Pos)
+
+    var trace1 = {
+        x: data.Year,
+        y: data.Pos,
+        name: 'Positives',
         type: 'bar'
-    }
-];
+    };
 
-Plotly.newPlot('barChart', data);
+    var trace2 = {
+        x: data.Year,
+        y: data.Neg,
+        name: 'Negative',
+        type: 'bar'
+    };
 
-console.log("hi")
+    var data = [trace1, trace2];
+
+    var layout = { barmode: 'stack' };
+
+    Plotly.newPlot('barChart', data, layout);
+
+});
+
+
+
+
+
+
+

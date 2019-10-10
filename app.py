@@ -67,5 +67,22 @@ def postives_ward(ward):
     return jsonify(pos_dict)
 
 
+@app.route("/summary/")
+def summary():
+    meta = df.groupby(["SEASON YEAR", "RESULT"]).count().reset_index()
+    year = list(meta[meta.RESULT == "negative"]["SEASON YEAR"])
+    neg = list(meta[meta.RESULT == "negative"]["BLOCK"])
+    pos = list(meta[meta.RESULT == "positive"]["BLOCK"])
+
+    new_df = {
+        "Year": year,
+        "Pos": pos,
+        "Neg": neg
+    }
+
+    #df_dict = new_df.to_dict(orient="index")
+    return jsonify(new_df)
+
+
 if __name__ == '__main__':
     app.run(debug=True)
