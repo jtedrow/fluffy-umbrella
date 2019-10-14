@@ -26,7 +26,7 @@ df = df.drop(["LOCATION", "Census Tracts",
 @app.route("/")
 def index():
     """Return the homepage."""
-    return render_template("index.html")
+    return render_template("test.html")
 
 
 @app.route("/names/")
