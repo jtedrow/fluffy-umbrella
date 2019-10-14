@@ -4,6 +4,7 @@ from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine
 from flask_sqlalchemy import SQLAlchemy
+import numpy as np
 
 app = Flask(__name__)
 
@@ -95,6 +96,25 @@ def summary():
 
     # df_dict = new_df.to_dict(orient="index")
     return jsonify(diction)
+
+
+@app.route("/summary/byweek/")
+def by_week():
+    df['Positive'] = np.where(df['RESULT'] == 'positive', 1, 0)
+    df['Negative'] = np.where(df['RESULT'] == 'negative', 1, 0)
+
+    pos = df.groupby(["SEASON YEAR", "WEEK", "SPECIES"]).sum()["Positive"]
+    neg = df.groupby(["SEASON YEAR", "WEEK", "SPECIES"]).sum()["Negative"]
+    count = df.groupby(["SEASON YEAR", "WEEK", "SPECIES"]).count()["Positive"]
+
+    new_df = pd.DataFrame({
+        "Positive": pos,
+        "Negative": neg,
+        "Total": count
+    }).reset_index()
+
+    new_dict = new_df.to_dict("records")
+    return jsonify(new_dict)
 
 
 if __name__ == '__main__':
