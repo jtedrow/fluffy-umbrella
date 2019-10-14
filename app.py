@@ -28,11 +28,21 @@ def index():
     return render_template("index.html")
 
 
-@app.route("/names")
+@app.route("/names/")
 def names():
     # Return a list of column names
+    new_df = df[["SEASON YEAR", "BLOCK",
+                 'TRAP_TYPE', 'SPECIES', 'Wards', 'Zip Codes']]
 
-    return jsonify(list(df.columns))
+    column_sum = []
+
+    for c in new_df.columns:
+        dictionary = {
+            f"{c}": list(set(new_df[c]))
+        }
+        column_sum.append(dictionary)
+
+    return jsonify(column_sum)
 
 
 @app.route("/positives/")
@@ -40,31 +50,29 @@ def postives():
     # Return a dictionary of only positive results
 
     pos_df = df[df.RESULT == "positive"].reset_index()
-    pos_dict = pos_df.to_dict(orient="index")
+    pos_dict = pos_df.to_dict("records")
 
     return jsonify(pos_dict)
 
 
-@app.route("/positives/year/<year>")
+@app.route("/year/<year>")
 def postives_year(year):
     # Return a dictionary of only positive results
     year = int(year)
-    pos_df = df[(df.RESULT == "positive") & (
-        df["SEASON YEAR"] == year)].reset_index()
-    pos_dict = pos_df.to_dict(orient="index")
+    year_df = df[df["SEASON YEAR"] == year].reset_index()
+    year_dict = year_df.to_dict("records")
 
-    return jsonify(pos_dict)
+    return jsonify(year_dict)
 
 
-@app.route("/positives/ward/<ward>")
+@app.route("/ward/<ward>")
 def postives_ward(ward):
     # Return a dictionary of only positive results
     ward = int(ward)
-    pos_df = df[(df.RESULT == "positive") & (
-        df["Wards"] == ward)].reset_index()
-    pos_dict = pos_df.to_dict(orient="index")
+    ward_df = df[df["Wards"] == ward].reset_index()
+    ward_dict = ward_df.to_dict("records")
 
-    return jsonify(pos_dict)
+    return jsonify(ward_dict)
 
 
 @app.route("/summary/")
@@ -74,14 +82,19 @@ def summary():
     neg = list(meta[meta.RESULT == "negative"]["BLOCK"])
     pos = list(meta[meta.RESULT == "positive"]["BLOCK"])
 
-    new_df = {
-        "Year": year,
-        "Pos": pos,
-        "Neg": neg
-    }
+    diction = []
 
-    #df_dict = new_df.to_dict(orient="index")
-    return jsonify(new_df)
+    for i in range(len(year)):
+        d = {
+            "Year": year[i],
+            "Pos": pos[i],
+            "Neg": neg[i]
+        }
+
+        diction.append(d)
+
+    # df_dict = new_df.to_dict(orient="index")
+    return jsonify(diction)
 
 
 if __name__ == '__main__':
