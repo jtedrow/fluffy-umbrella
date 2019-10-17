@@ -20,10 +20,11 @@ body {font-size:16px;}
     <h3 class="w3-padding-64" style="color:white"><b>Mosquito<br>Study</b></h3>
   </div>
   <div class="w3-bar-block">
-    <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white" style="color:rgb(185, 49, 49)">Home</a>  
+    <a href="#home" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white" style="color:rgb(185, 49, 49)">Home</a>  
     <a href="#dashboard" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white" style="color:rgb(185, 49, 49)">Dashboard</a>
     <a href="#map" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white" style="color:rgb(185, 49, 49)">Map</a> 
-    <a href="#education" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white" style="color:rgb(185, 49, 49)">Education</a> 
+    <a href="#education" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white" style="color:rgb(185, 49, 49)">Education</a>
+    <a href="#tools" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white" style="color:rgb(185, 49, 49)">Tools</a>
     <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white" style="color:rgb(185, 49, 49)">About Us</a>
   </div>
 </nav>
@@ -41,12 +42,16 @@ body {font-size:16px;}
 <div class="w3-main" style="margin-left:220px;margin-right:10px;">
 
   <!-- Header -->
-  <div class="w3-container" style="margin-top:80px" id="dashboard">
+  <div class="w3-container" style="margin-top:80px" id="home">
     <h2 class="w3-xxxlarge" style="color: #282828;"><b>West Nile Virus in Chicago</b></h2>
-    <h1 class="w3-xxlarge" w3-text-red style="color:rgb(185, 49, 49);"><b>Dashboard</b></h1>
-    <hr style="width:100px;border:5px solid rgb(185, 49, 49)" class="w3-round">
+    <img src="images\image (3).png" style=" display:block; margin-left:auto; margin-right:auto;">
+
+  <!--Map-->
+  <div class="w3-container" style="margin-top:80px" id="dashboard">
+      <h1 class="w3-xxlarge" w3-text-red style="color:rgb(185, 49, 49);"><b>Dashboard</b></h1>
+      <hr style="width:100px;border:5px solid rgb(185, 49, 49)" class="w3-round">
   </div>
-  
+
   <!-- Photo grid (modal) -->
   <div class="w3-row-padding">
     <div class="w3-half">
@@ -78,18 +83,68 @@ body {font-size:16px;}
   </div>
 
   <!-- Education -->
-  <div class="w3-container" id="education" style="margin-top:75px">
+  <div class="w3-container" id="education" style="margin-top:80px">
     <h1 class="w3-xxlarge" style="color:rgb(185, 49, 49);"><b>Education</b></h1>
     <hr style="width:100px;border:5px solid rgb(185, 49, 49)" class="w3-round">
-    <p>Something about West Nile Virus</p>
-    <p>Some text about our services - what we do and what we offer. We are lorem ipsum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-    dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor
-    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    </p>
+      <img src="images\west-nile-virus-transmission-article.png" alt="West Nile Transmission" style="display:block; margin-left:auto; margin-right:auto;"/> 
+      <br>
+      <br>
+    <div class="w3-col m12 w3-margin-bottom">
+      <div class="w3-light-grey">
+        <img src="images\culex pipiens.jpg" alt="Culex Pipiens" style="width:20%; float:left; margin-right: 10px; margin-bottom: 5px;">
+        <h3>Culex Pipiens</h3>
+        <div>Culex pipiens is the common house mosquito—the one that tries to bite you at night and wakes you up with its dreadful buzzing.
+            The typical behavioural pattern of this nocturnal pest is to come into our houses and attack us between sunset and sunrise.
+            A single Culex pipiens, eager to get enough blood to lay its eggs, can ruin your night with multiple bites:
+            the female of the species needs this blood meal to complete her biological cycle.
+        </div>
+      </div>
+    </div>
+    <div class="w3-col m12 w3-margin-bottom">
+      <div class="w3-light-grey">
+        <img src="images\culex restuans.jpg" alt="Culex Restuans" style="width:20%; float:left;margin-right:10px; margin-bottom: 5px;">
+        <h3>Culex Restuans</h3>
+        <div>Culex restuans is a species of mosquito known to occur in Canada, the United States, Mexico, Guatemala,
+            and Honduras. It is a disease vector of St. Louis encephalitis and West Nile Virus.The larvae are found in
+            a wide variety of aquatic habitats, such as ditches, pools in streams, woodland pools,
+            and artificial containers. The females are regarded as troublesome biters 
+            by some observers, although others say that they rarely bite humans. 
+        </div>
+      </div>
+    </div>
+    <div class="w3-col m12 w3-margin-bottom">
+      <div class="w3-light-grey">
+        <img src="images\Culex-Salinarius.png" alt="Culex Salinarius" style="width:20%; float:left; margin-right:10px; margin-bottom: 5px;">
+        <h3>Culex Salinarius</h3>
+        <div>Culex salinarius is a mosquito species that accepts birds as well as mammals.
+            As a result, it has been incriminated as a potential bridge vector of the encephalitis viruses.
+            Virus isolations have been made from wild populations but are a fairly rare occurrence.
+            Laboratory studies suggest that the mosquito has an extremely high threshold of infection,
+            and probably only functions as a secondary vector during epizootic episodes.
+        </div>
+      </div>
+    </div>
+    <div class="w3-col m12 w3-margin-bottom">
+      <div class="w3-light-grey">
+        <img src="images\Culex Territans.png" alt="Culex Territans" style="width:20%; float:left; margin-right:10px; margin-bottom: 5px;">
+        <h3>Culex Territans</h3>
+        <div>Culex territans is a frog feeding mosquito that has no known economic importance.
+            The species shares habitat with a wide variety of amphibians and rarely, if ever, feeds on warm blooded animals.
+            It is possible that the mosquito plays a role in the transfer of arboviruses to cold blooded overwintering hosts but the hypothesis has never been fully documented.
+            Like Wyeomyia smithii, the mosquito is a tiny scientific curiosity that poses no threat to humankind.</p>
+        </div>
+      </div>
+      <a href="https://www.cdc.gov/westnile/index.html" class="btn btn-primary" ><b>Click here for more information about the West Nile Virus</b></a>
+    </div>
+
+  <!--Tools-->
+  <div class="w3-container" id="tools" style="margin-top:80px">
+    <h1 class="w3-xxlarge" w3-text-red style="color:rgb(185, 49, 49);"><b>Tools</b></h1>
+    <hr style="width:100px;border:5px solid rgb(185, 49, 49)" class="w3-round">
   </div>
-  
+
   <!-- About -->
-  <div class="w3-container" id="about" style="margin-top:75px">
+  <div class="w3-container" id="about" style="margin-top:80px">
     <h1 class="w3-xxlarge" style="color:rgb(185, 49, 49) ;"><b>About Us</b></h1>
     <hr style="width:100px;border:5px solid rgb(185, 49, 49)" class="w3-round">
     <p><b>We are a group of students from George Washington University - Data Analystics Boot Camp 2019.</b></p>
@@ -155,7 +210,7 @@ body {font-size:16px;}
 </div>
 
 <!-- W3.CSS Container -->
-<div class="w3-light-grey w3-container w3-padding-32" style="margin-top:75px;padding-right:58px"><p class="w3-right">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></p></div>
+<div class="w3-light-grey w3-container w3-padding-32" style="margin-top:75px;padding-right:58px"><p class="w3-right"><b>Brought to you by the Fluffy Umbrella Academy© BCMAJ</b></a></p></div>
 
 <script>
 // Script to open and close sidebar
