@@ -31,6 +31,13 @@
   .w3-half img:hover {
     opacity: 1
   }
+
+  .jumbotron {
+    background-image: url('https://www.mitchellkline.com/wp-content/uploads/2017/03/Fotolia_120827021_Subscription_Monthly_M.jpg');
+    background-size: cover;
+    height: 100%;
+    background-position: bottom;
+  }
 </style>
 
 <body>
@@ -73,235 +80,259 @@
   <div class="w3-main" style="margin-left:220px;margin-right:10px;">
 
     <!-- Header -->
-    <div class="w3-container" style="margin-top:80px" id="home">
-      <h2 class="w3-xxxlarge" style="color: #282828;"><b>West Nile Virus in Chicago</b></h2>
-      <img src="images\image (3).png" style=" display:block; margin-left:auto; margin-right:auto;">
-
-      <!--Map-->
-      <div class="w3-container" style="margin-top:80px" id="dashboard">
-        <h1 class="w3-xxlarge" w3-text-red style="color:rgb(185, 49, 49);"><b>Dashboard</b></h1>
-        <hr style="width:100px;border:5px solid rgb(185, 49, 49)" class="w3-round">
+    <br>
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-4" style="color:whitesmoke; margin-top: 45%;">West Nile Virus in Chicago</h1>
+        <p class="lead" style="color:whitesmoke;">This is a modified jumbotron that occupies the entire horizontal space
+          of its parent.</p>
       </div>
+    </div>
 
-      <!-- Photo grid (modal) -->
+    <!--Map-->
+    <div class="w3-container" style="margin-top:80px" id="dashboard">
+      <h1 class="w3-xxlarge" w3-text-red style="color:rgb(185, 49, 49);"><b>Dashboard</b></h1>
+      <hr style="width:100px;border:5px solid rgb(185, 49, 49)" class="w3-round">
+    </div>
+
+    <!-- Photo grid (modal) -->
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card" style="background-color: rgb(239,236,234)">
+          <div class="card-body">
+            <div id="barChart"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card" style="background-color: rgb(239,236,234)">
+          <div class="card-body">
+            <h5>Select Year:</h5>
+            <select id="selYear" onchange="buildPie(this.value)"></select>
+            <br>
+            <div id="pieChart"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal for full size images on click-->
+    <div id="modal01" class="w3-modal w3-black" style="padding-top:0" onclick="this.style.display='none'">
+      <span class="w3-button w3-black w3-xxlarge w3-display-topright">×</span>
+      <div class="w3-modal-content w3-animate-zoom w3-center w3-transparent w3-padding-64">
+        <img id="img01" class="w3-image">
+        <p id="caption"></p>
+      </div>
+    </div>
+
+    <!--By Ward-->
+    <div class="w3-container" style="margin-top:80px" id="byWard">
+      <h1 class="w3-xxlarge" w3-text-red style="color:rgb(185, 49, 49);"><b>By Ward</b></h1>
+      <hr style="width:100px;border:5px solid rgb(185, 49, 49)" class="w3-round">
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
           <div class="card" style="background-color: rgb(239,236,234)">
             <div class="card-body">
-              <div id="barChart"></div>
+              <h5>Select Ward:</h5>
+              <select id="selWard" onchange="buildCharts(this.value)"></select>
+              <div id="wardBarChart"></div>
             </div>
           </div>
         </div>
-        <div class="col-md-6">
+      </div>
+    </div>
+
+    <!--By Year-->
+    <div class="w3-container" style="margin-top:80px" id="byWard">
+      <h1 class="w3-xxlarge" w3-text-red style="color:rgb(185, 49, 49);"><b>By Year</b></h1>
+      <hr style="width:100px;border:5px solid rgb(185, 49, 49)" class="w3-round">
+      <div class="row">
+        <div class="col-md-12">
           <div class="card" style="background-color: rgb(239,236,234)">
             <div class="card-body">
-              <h5>Select Year:</h5>
-              <select id="selYear" onchange="buildPie(this.value)"></select>
-              <br>
-              <div id="pieChart"></div>
+              <div id="sliderChart"></div>
             </div>
           </div>
         </div>
       </div>
+    </div>
 
-      <!-- Modal for full size images on click-->
-      <div id="modal01" class="w3-modal w3-black" style="padding-top:0" onclick="this.style.display='none'">
-        <span class="w3-button w3-black w3-xxlarge w3-display-topright">×</span>
-        <div class="w3-modal-content w3-animate-zoom w3-center w3-transparent w3-padding-64">
-          <img id="img01" class="w3-image">
-          <p id="caption"></p>
+    <div class="w3-container" style="margin-top:80px" id="map">
+      <h1 class="w3-xxlarge" w3-text-red style="color:rgb(185, 49, 49);"><b>Map</b></h1>
+      <hr style="width:100px;border:5px solid rgb(185, 49, 49)" class="w3-round">
+    </div>
+
+    <!-- Education -->
+    <div class="w3-container" id="education" style="margin-top:80px">
+      <h1 class="w3-xxlarge" style="color:rgb(185, 49, 49);"><b>Education</b></h1>
+      <hr style="width:100px;border:5px solid rgb(185, 49, 49)" class="w3-round">
+      <img src="static\images\west-nile-virus-transmission-article.png" alt="West Nile Transmission"
+        style="display:block; margin-left:auto; margin-right:auto;" />
+      <br>
+      <br>
+      <div class="w3-col m12 w3-margin-bottom">
+        <div class="w3-light-grey">
+          <img src="static\images/culex pipiens.jpg" alt="Culex Pipiens"
+            style="width:20%; float:left; margin-right: 10px; margin-bottom: 5px;">
+          <h3>Culex Pipiens</h3>
+          <div>Culex pipiens is the common house mosquito—the one that tries to bite you at night and wakes you up
+            with its dreadful buzzing.
+            The typical behavioural pattern of this nocturnal pest is to come into our houses and attack us between
+            sunset and sunrise.
+            A single Culex pipiens, eager to get enough blood to lay its eggs, can ruin your night with multiple
+            bites:
+            the female of the species needs this blood meal to complete her biological cycle.
+          </div>
         </div>
       </div>
+      <div class="w3-col m12 w3-margin-bottom">
+        <div class="w3-light-grey">
+          <img src="static\images\culex restuans.jpg" alt="Culex Restuans"
+            style="width:20%; float:left;margin-right:10px; margin-bottom: 5px;">
+          <h3>Culex Restuans</h3>
+          <div>Culex restuans is a species of mosquito known to occur in Canada, the United States, Mexico, Guatemala,
+            and Honduras. It is a disease vector of St. Louis encephalitis and West Nile Virus.The larvae are found in
+            a wide variety of aquatic habitats, such as ditches, pools in streams, woodland pools,
+            and artificial containers. The females are regarded as troublesome biters
+            by some observers, although others say that they rarely bite humans.
+          </div>
+        </div>
+      </div>
+      <div class="w3-col m12 w3-margin-bottom">
+        <div class="w3-light-grey">
+          <img src="static\images\Culex-Salinarius.png" alt="Culex Salinarius"
+            style="width:20%; float:left; margin-right:10px; margin-bottom: 5px;">
+          <h3>Culex Salinarius</h3>
+          <div>Culex salinarius is a mosquito species that accepts birds as well as mammals.
+            As a result, it has been incriminated as a potential bridge vector of the encephalitis viruses.
+            Virus isolations have been made from wild populations but are a fairly rare occurrence.
+            Laboratory studies suggest that the mosquito has an extremely high threshold of infection,
+            and probably only functions as a secondary vector during epizootic episodes.
+          </div>
+        </div>
+      </div>
+      <div class="w3-col m12 w3-margin-bottom">
+        <div class="w3-light-grey">
+          <img src="static\images\Culex Territans.png" alt="Culex Territans"
+            style="width:20%; float:left; margin-right:10px; margin-bottom: 5px;">
+          <h3>Culex Territans</h3>
+          <div>Culex territans is a frog feeding mosquito that has no known economic importance.
+            The species shares habitat with a wide variety of amphibians and rarely, if ever, feeds on warm blooded
+            animals.
+            It is possible that the mosquito plays a role in the transfer of arboviruses to cold blooded overwintering
+            hosts but the hypothesis has never been fully documented.
+            Like Wyeomyia smithii, the mosquito is a tiny scientific curiosity that poses no threat to humankind.</p>
+          </div>
+        </div>
+        <a href="https://www.cdc.gov/westnile/index.html" class="btn btn-primary"><b>Click here for more information
+            about the West Nile Virus</b></a>
+      </div>
 
-      <!--Map-->
-      <div class="w3-container" style="margin-top:80px" id="byWard">
-        <h1 class="w3-xxlarge" w3-text-red style="color:rgb(185, 49, 49);"><b>By Ward</b></h1>
+      <!--Tools-->
+      <div class="w3-container" id="tools" style="margin-top:80px">
+        <h1 class="w3-xxlarge" w3-text-red style="color:rgb(185, 49, 49);"><b>Tools</b></h1>
         <hr style="width:100px;border:5px solid rgb(185, 49, 49)" class="w3-round">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="card" style="background-color: rgb(239,236,234)">
-              <div class="card-body">
-                <h5>Select Ward:</h5>
-                <select id="selWard" onchange="buildCharts(this.value)"></select>
-                <div id="wardBarChart"></div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
 
-      <div class="w3-container" style="margin-top:80px" id="map">
-        <h1 class="w3-xxlarge" w3-text-red style="color:rgb(185, 49, 49);"><b>Map</b></h1>
+      <!-- About -->
+      <div class="w3-container" id="about" style="margin-top:80px">
+        <h1 class="w3-xxlarge" style="color:rgb(185, 49, 49) ;"><b>About Us</b></h1>
         <hr style="width:100px;border:5px solid rgb(185, 49, 49)" class="w3-round">
+        <p><b>We are a group of students from George Washington University - Data Analystics Boot Camp 2019.</b></p>
       </div>
 
-      <!-- Education -->
-      <div class="w3-container" id="education" style="margin-top:80px">
-        <h1 class="w3-xxlarge" style="color:rgb(185, 49, 49);"><b>Education</b></h1>
-        <hr style="width:100px;border:5px solid rgb(185, 49, 49)" class="w3-round">
-        <img src="images\west-nile-virus-transmission-article.png" alt="West Nile Transmission"
-          style="display:block; margin-left:auto; margin-right:auto;" />
-        <br>
-        <br>
-        <div class="w3-col m12 w3-margin-bottom">
+      <!-- The Team -->
+      <div class="w3-row-padding w3-grayscale">
+        <div class="w3-col m1 w3-margin-bottom"></div>
+        <div class="w3-col m2 w3-margin-bottom">
           <div class="w3-light-grey">
-            <img src="images\culex pipiens.jpg" alt="Culex Pipiens"
-              style="width:20%; float:left; margin-right: 10px; margin-bottom: 5px;">
-            <h3>Culex Pipiens</h3>
-            <div>Culex pipiens is the common house mosquito—the one that tries to bite you at night and wakes you up
-              with its dreadful buzzing.
-              The typical behavioural pattern of this nocturnal pest is to come into our houses and attack us between
-              sunset and sunrise.
-              A single Culex pipiens, eager to get enough blood to lay its eggs, can ruin your night with multiple
-              bites:
-              the female of the species needs this blood meal to complete her biological cycle.
+            <img src="static\headshot\Alexandra Fenelon - Head Shot 2019.jpg" alt="Alexandra Fenelon"
+              style="width:100%">
+            <div class="w3-container">
+              <h3>Alexandra Fenelon</h3>
+              <a href="url">LinkedIn</a>
+              <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
             </div>
           </div>
         </div>
-        <div class="w3-col m12 w3-margin-bottom">
+        <div class="w3-col m2 w3-margin-bottom">
           <div class="w3-light-grey">
-            <img src="images\culex restuans.jpg" alt="Culex Restuans"
-              style="width:20%; float:left;margin-right:10px; margin-bottom: 5px;">
-            <h3>Culex Restuans</h3>
-            <div>Culex restuans is a species of mosquito known to occur in Canada, the United States, Mexico, Guatemala,
-              and Honduras. It is a disease vector of St. Louis encephalitis and West Nile Virus.The larvae are found in
-              a wide variety of aquatic habitats, such as ditches, pools in streams, woodland pools,
-              and artificial containers. The females are regarded as troublesome biters
-              by some observers, although others say that they rarely bite humans.
+            <img src="static\headshot\badr.jpg" alt="Badr" style="width:100%">
+            <div class="w3-container">
+              <h3>Badr Werroll</h3>
+              <a href="url">LinkedIn</a>
+              <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
             </div>
           </div>
         </div>
-        <div class="w3-col m12 w3-margin-bottom">
+        <div class="w3-col m2 w3-margin-bottom">
           <div class="w3-light-grey">
-            <img src="images\Culex-Salinarius.png" alt="Culex Salinarius"
-              style="width:20%; float:left; margin-right:10px; margin-bottom: 5px;">
-            <h3>Culex Salinarius</h3>
-            <div>Culex salinarius is a mosquito species that accepts birds as well as mammals.
-              As a result, it has been incriminated as a potential bridge vector of the encephalitis viruses.
-              Virus isolations have been made from wild populations but are a fairly rare occurrence.
-              Laboratory studies suggest that the mosquito has an extremely high threshold of infection,
-              and probably only functions as a secondary vector during epizootic episodes.
+            <img src="static\headshot\camila.jpg" alt="Camila Cois" style="width:100%">
+            <div class="w3-container">
+              <h3>Camila Cois</h3>
+              <a href="url">LinkedIn</a>
+              <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
             </div>
           </div>
         </div>
-        <div class="w3-col m12 w3-margin-bottom">
+        <div class="w3-col m2 w3-margin-bottom">
           <div class="w3-light-grey">
-            <img src="images\Culex Territans.png" alt="Culex Territans"
-              style="width:20%; float:left; margin-right:10px; margin-bottom: 5px;">
-            <h3>Culex Territans</h3>
-            <div>Culex territans is a frog feeding mosquito that has no known economic importance.
-              The species shares habitat with a wide variety of amphibians and rarely, if ever, feeds on warm blooded
-              animals.
-              It is possible that the mosquito plays a role in the transfer of arboviruses to cold blooded overwintering
-              hosts but the hypothesis has never been fully documented.
-              Like Wyeomyia smithii, the mosquito is a tiny scientific curiosity that poses no threat to humankind.</p>
+            <img src="static\headshot\james.jpg" alt="James Tedrow" style="width:100%">
+            <div class="w3-container">
+              <h3>James Tedrow</h3>
+              <a href="url">LinkedIn</a>
+              <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
             </div>
           </div>
-          <a href="https://www.cdc.gov/westnile/index.html" class="btn btn-primary"><b>Click here for more information
-              about the West Nile Virus</b></a>
         </div>
-
-        <!--Tools-->
-        <div class="w3-container" id="tools" style="margin-top:80px">
-          <h1 class="w3-xxlarge" w3-text-red style="color:rgb(185, 49, 49);"><b>Tools</b></h1>
-          <hr style="width:100px;border:5px solid rgb(185, 49, 49)" class="w3-round">
+        <div class="w3-col m2 w3-margin-bottom">
+          <div class="w3-light-grey">
+            <img src="static\headshot\MuditProfile.png" alt="Mudit Mathur" style="width:100%">
+            <div class="w3-container">
+              <h3>Mudit Mathur</h3>
+              <a href="https://www.linkedin.com/in/mudit-mathur-baa49817b">LinkedIn</a>
+              <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+            </div>
+          </div>
         </div>
-
-        <!-- About -->
-        <div class="w3-container" id="about" style="margin-top:80px">
-          <h1 class="w3-xxlarge" style="color:rgb(185, 49, 49) ;"><b>About Us</b></h1>
-          <hr style="width:100px;border:5px solid rgb(185, 49, 49)" class="w3-round">
-          <p><b>We are a group of students from George Washington University - Data Analystics Boot Camp 2019.</b></p>
-        </div>
-
-        <!-- The Team -->
-        <div class="w3-row-padding w3-grayscale">
-          <div class="w3-col m1 w3-margin-bottom"></div>
-          <div class="w3-col m2 w3-margin-bottom">
-            <div class="w3-light-grey">
-              <img src="headshot\Alexandra Fenelon - Head Shot 2019.jpg" alt="Alexandra Fenelon" style="width:100%">
-              <div class="w3-container">
-                <h3>Alexandra Fenelon</h3>
-                <a href="url">LinkedIn</a>
-                <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
-              </div>
-            </div>
-          </div>
-          <div class="w3-col m2 w3-margin-bottom">
-            <div class="w3-light-grey">
-              <img src="headshot\badr.jpg" alt="Badr" style="width:100%">
-              <div class="w3-container">
-                <h3>Badr Werroll</h3>
-                <a href="url">LinkedIn</a>
-                <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
-              </div>
-            </div>
-          </div>
-          <div class="w3-col m2 w3-margin-bottom">
-            <div class="w3-light-grey">
-              <img src="headshot\camila.jpg" alt="Camila Cois" style="width:100%">
-              <div class="w3-container">
-                <h3>Camila Cois</h3>
-                <a href="url">LinkedIn</a>
-                <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
-              </div>
-            </div>
-          </div>
-          <div class="w3-col m2 w3-margin-bottom">
-            <div class="w3-light-grey">
-              <img src="headshot\james.jpg" alt="James Tedrow" style="width:100%">
-              <div class="w3-container">
-                <h3>James Tedrow</h3>
-                <a href="url">LinkedIn</a>
-                <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
-              </div>
-            </div>
-          </div>
-          <div class="w3-col m2 w3-margin-bottom">
-            <div class="w3-light-grey">
-              <img src="headshot\MuditProfile.png" alt="Mudit Mathur" style="width:100%">
-              <div class="w3-container">
-                <h3>Mudit Mathur</h3>
-                <a href="https://www.linkedin.com/in/mudit-mathur-baa49817b">LinkedIn</a>
-                <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
-              </div>
-            </div>
-          </div>
-          <div class="w3-col m1 w3-margin-bottom"></div>
-        </div>
-
-        <!-- End page content -->
+        <div class="w3-col m1 w3-margin-bottom"></div>
       </div>
 
-      <!-- W3.CSS Container -->
-      <div class="w3-light-grey w3-container w3-padding-32" style="margin-top:75px;padding-right:58px">
-        <p class="w3-right"><b>Brought to you by the Fluffy Umbrella Academy© BCMAJ</b></a></p>
-      </div>
+      <!-- End page content -->
+    </div>
 
-      <script>
-        // Script to open and close sidebar
-        function w3_open() {
-          document.getElementById("mySidebar").style.display = "block";
-          document.getElementById("myOverlay").style.display = "block";
-        }
+    <!-- W3.CSS Container -->
+    <div class="w3-light-grey w3-container w3-padding-32" style="margin-top:75px;padding-right:58px">
+      <p class="w3-right"><b>Brought to you by the Fluffy Umbrella Academy© BCMAJ</b></a></p>
+    </div>
 
-        function w3_close() {
-          document.getElementById("mySidebar").style.display = "none";
-          document.getElementById("myOverlay").style.display = "none";
-        }
+    <script>
+      // Script to open and close sidebar
+      function w3_open() {
+        document.getElementById("mySidebar").style.display = "block";
+        document.getElementById("myOverlay").style.display = "block";
+      }
 
-        // Modal Image Gallery
-        function onClick(element) {
-          document.getElementById("img01").src = element.src;
-          document.getElementById("modal01").style.display = "block";
-          var captionText = document.getElementById("caption");
-          captionText.innerHTML = element.alt;
-        }
-      </script>
+      function w3_close() {
+        document.getElementById("mySidebar").style.display = "none";
+        document.getElementById("myOverlay").style.display = "none";
+      }
 
-      <script src="https://cdn.plot.ly/plotly-1.31.2.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
-      <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+      // Modal Image Gallery
+      function onClick(element) {
+        document.getElementById("img01").src = element.src;
+        document.getElementById("modal01").style.display = "block";
+        var captionText = document.getElementById("caption");
+        captionText.innerHTML = element.alt;
+      }
+    </script>
+
+    <script src="https://cdn.plot.ly/plotly-1.31.2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/slider.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/slider2.js') }}"></script>
+
 
 </body>
 

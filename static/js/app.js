@@ -40,7 +40,6 @@ function init() {
 }
 
 function buildCharts(sample) {
-    console.log(sample);
 
     d3.json(`/ward/${sample}`).then((data) => {
         let years = [...new Set(data.map(x => x["SEASON YEAR"]))].sort();
@@ -90,7 +89,10 @@ function buildCharts(sample) {
             title: `Ward ${sample} Results by Year`,
             barmode: 'stack',
             plot_bgcolor: 'rgb(239,236,234)',
-            paper_bgcolor: 'rgb(239,236,234)'
+            paper_bgcolor: 'rgb(239,236,234)',
+            yaxis: {
+                title: 'Total Traps Tested',
+            }
         };
 
         Plotly.newPlot('wardBarChart', data, layout2);
@@ -102,12 +104,10 @@ function buildPie(sample) {
     d3.json(`/year/${sample}`).then((data) => {
         panel = d3.select("#pieChart");
         panel.html("")
-        console.log(data)
 
         let uniqueTypes = [...new Set(data.map(x => x["SPECIES"]))].sort();
         let diction = []
 
-        console.log(uniqueTypes)
 
 
         uniqueTypes.forEach(type => {
@@ -118,7 +118,6 @@ function buildPie(sample) {
             diction.push(dict)
         });
 
-        console.log(diction)
 
         let chart = [{
             values: diction.map(x => x.Count),
@@ -185,7 +184,10 @@ d3.json("/summary/").then((data) => {
         title: "West Nile Virus Results per Year",
         barmode: 'stack',
         plot_bgcolor: 'rgb(239,236,234)',
-        paper_bgcolor: 'rgb(239,236,234)'
+        paper_bgcolor: 'rgb(239,236,234)',
+        yaxis: {
+            title: 'Total Traps Tested',
+        }
     };
 
     Plotly.newPlot('barChart', data, layout);
