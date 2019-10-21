@@ -1,3 +1,5 @@
+$(".jumbotron").velocity("fadeIn", { duration: 1500 });
+
 function init() {
     // Grab a reference to the dropdown select element
     var selectorWard = d3.select("#selWard");

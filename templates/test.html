@@ -7,6 +7,22 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
   integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+  integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+  crossorigin="" />
+<script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+  integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+  crossorigin=""></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.ui.min.js"></script>
+
+<!-- d3 JavaScript -->
+<script src="https://d3js.org/d3.v4.min.js"></script>
+
+<!-- Our CSS -->
+<link rel="stylesheet" type="text/css" href="../static/css/style.css">
+
 <style>
   body,
   h1,
@@ -84,12 +100,10 @@
     <div class="jumbotron jumbotron-fluid">
       <div class="container">
         <h1 class="display-4" style="color:whitesmoke; margin-top: 45%;">West Nile Virus in Chicago</h1>
-        <p class="lead" style="color:whitesmoke;">This is a modified jumbotron that occupies the entire horizontal space
-          of its parent.</p>
       </div>
     </div>
 
-    <!--Map-->
+    <!--Dashboard-->
     <div class="w3-container" style="margin-top:80px" id="dashboard">
       <h1 class="w3-xxlarge" w3-text-red style="color:rgb(185, 49, 49);"><b>Dashboard</b></h1>
       <hr style="width:100px;border:5px solid rgb(185, 49, 49)" class="w3-round">
@@ -150,29 +164,31 @@
         <div class="col-md-12">
           <div class="card" style="background-color: rgb(239,236,234)">
             <div class="card-body">
-              <div id="sliderChart"></div>
+              <div id="myDiv"></div>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="w3-container" style="margin-top:80px" id="map">
+    <!--Map-->
+    <div class="w3-container" style="margin-top:80px">
       <h1 class="w3-xxlarge" w3-text-red style="color:rgb(185, 49, 49);"><b>Map</b></h1>
       <hr style="width:100px;border:5px solid rgb(185, 49, 49)" class="w3-round">
+      <div id="map"></div>
     </div>
 
     <!-- Education -->
     <div class="w3-container" id="education" style="margin-top:80px">
-      <h1 class="w3-xxlarge" style="color:rgb(185, 49, 49);"><b>Education</b></h1>
-      <hr style="width:100px;border:5px solid rgb(185, 49, 49)" class="w3-round">
+      <h1 class="w3-xxlarge" style="color:rgb(201, 21, 21);"><b>Education</b></h1>
+      <hr style="width:100px;border:5px solid rgb(201, 21, 21)" class="w3-round">
       <img src="static\images\west-nile-virus-transmission-article.png" alt="West Nile Transmission"
         style="display:block; margin-left:auto; margin-right:auto;" />
       <br>
       <br>
       <div class="w3-col m12 w3-margin-bottom">
         <div class="w3-light-grey">
-          <img src="static\images/culex pipiens.jpg" alt="Culex Pipiens"
+          <img src="static\images\culex pipiens.jpg" alt="Culex Pipiens"
             style="width:20%; float:left; margin-right: 10px; margin-bottom: 5px;">
           <h3>Culex Pipiens</h3>
           <div>Culex pipiens is the common house mosquito—the one that tries to bite you at night and wakes you up
@@ -224,114 +240,150 @@
             Like Wyeomyia smithii, the mosquito is a tiny scientific curiosity that poses no threat to humankind.</p>
           </div>
         </div>
-        <a href="https://www.cdc.gov/westnile/index.html" class="btn btn-primary"><b>Click here for more information
-            about the West Nile Virus</b></a>
+        <a href="https://www.cdc.gov/westnile/index.html" class="btn btn"
+          style="background-color: #282828; color: white;border-radius: 12px;"><b>Click here for more information
+            about the West Nile Virus</b> </a>
       </div>
 
       <!--Tools-->
       <div class="w3-container" id="tools" style="margin-top:80px">
-        <h1 class="w3-xxlarge" w3-text-red style="color:rgb(185, 49, 49);"><b>Tools</b></h1>
-        <hr style="width:100px;border:5px solid rgb(185, 49, 49)" class="w3-round">
+        <h1 class="w3-xxlarge" w3-text-red style="color:rgb(201, 21, 21);"><b>Tools</b></h1>
+        <hr style="width:100px;border:5px solid rgb(201, 21, 21)" class="w3-round">
+        <div class="w3-col m3 w3-margin-bottom" style="margin-top: 30px;">
+          <div>
+            <img src="static\images\python.png" alt="python" style="width: 100px; height: 100px;">
+          </div>
+        </div>
+        <div class="w3-col m3 w3-margin-bottom" style="margin-top: 30px;">
+          <div>
+            <img src="static\images\leaflet.jpg" alt="leaflet" style="width: 100px; height: 100px;">
+          </div>
+        </div>
+        <div class="w3-col m3 w3-margin-bottom" style="margin-top: 30px;">
+          <div>
+            <img src="static\images\js.jpg" alt="js" style="width: 100px; height: 100px;">
+          </div>
+        </div>
+        <div class="w3-col m3 w3-margin-bottom" style="margin-top: 30px;">
+          <div>
+            <img src="static\images\html.png" alt="html" style="width: 100px; height: 100px;">
+          </div>
+        </div>
+        <div class="w3-col m3 w3-margin-bottom" style="margin-top: 60px;">
+          <div>
+            <img src="static\images\css.jpg" alt="css" style="width: 100px; height: 100px;">
+          </div>
+        </div>
+        <div class="w3-col m3 w3-margin-bottom" style="margin-top: 60px;">
+          <div>
+            <img src="static\images\Bootstrap.png" alt="bootstrap" style="width: 100px; height: 100px;">
+          </div>
+        </div>
+        <div class="w3-col m3 w3-margin-bottom" style="margin-top: 60px;">
+          <div>
+            <img src="static\images\flask.png" alt="flask" style="width: 100px; height: 100px;">
+          </div>
+        </div>
+        <div class="w3-col m3 w3-margin-bottom" style="margin-top: 60px;">
+          <div>
+            <img src="static\images\d3.png" alt="d3" style="width: 100px; height: 100px;">
+          </div>
+        </div>
+
+        <!-- About -->
+        <div class="w3-container" id="about" style="margin-top:80px">
+          <h1 class="w3-xxlarge" style="color:rgb(201, 21, 21) ;"><b>About Us</b></h1>
+          <hr style="width:100px;border:5px solid rgb(201, 21, 21)" class="w3-round">
+          <p><b>We are a group of students from George Washington University - Data Analystics Boot Camp 2019.</b></p>
+        </div>
+
+        <!-- The Team -->
+        <div class="w3-row-padding w3-grayscale">
+          <div class="w3-col m1 w3-margin-bottom"></div>
+          <div class="w3-col m2 w3-margin-bottom">
+            <div class="w3-light-grey">
+              <img src="static\headshot\alex.jpg" alt="Alexandra Fenelon" style="width:100%">
+              <div class="w3-container">
+                <h3>Alexandra Fenelon</h3>
+                <a href="https://www.linkedin.com/in/afenelon" target="_blank">LinkedIn</a>
+              </div>
+            </div>
+          </div>
+          <div class="w3-col m2 w3-margin-bottom">
+            <div class="w3-light-grey">
+              <img src="static\headshot\badr.jpg" alt="Badr" style="width:100%">
+              <div class="w3-container">
+                <h3>Badr Werroll</h3>
+                <a href="https://www.linkedin.com/in/badr-worrell-1b035684" target="_blank">LinkedIn</a>
+              </div>
+            </div>
+          </div>
+          <div class="w3-col m2 w3-margin-bottom">
+            <div class="w3-light-grey">
+              <img src="static\headshot\camila.jpg" alt="Camila Cois" style="width:100%">
+              <div class="w3-container">
+                <h3>Camila Cois</h3>
+                <a href="https://www.linkedin.com/in/" target="_blank">LinkedIn</a>
+              </div>
+            </div>
+          </div>
+          <div class="w3-col m2 w3-margin-bottom">
+            <div class="w3-light-grey">
+              <img src="static\headshot\james.jpg" alt="James Tedrow" style="width:100%">
+              <div class="w3-container">
+                <h3>James Tedrow</h3>
+                <a href="https://www.linkedin.com/in/jamestedrow" target="_blank">LinkedIn</a>
+              </div>
+            </div>
+          </div>
+          <div class="w3-col m2 w3-margin-bottom">
+            <div class="w3-light-grey">
+              <img src="static\headshot/mudit.jpg" alt="Mudit Mathur" style="width:100%">
+              <div class="w3-container">
+                <h3>Mudit Mathur</h3>
+                <a href="https://www.linkedin.com/in/mudit-mathur-baa49817b" target="_blank">LinkedIn</a>
+              </div>
+            </div>
+          </div>
+          <div class="w3-col m1 w3-margin-bottom"></div>
+        </div>
+
+        <!-- End page content -->
       </div>
 
-      <!-- About -->
-      <div class="w3-container" id="about" style="margin-top:80px">
-        <h1 class="w3-xxlarge" style="color:rgb(185, 49, 49) ;"><b>About Us</b></h1>
-        <hr style="width:100px;border:5px solid rgb(185, 49, 49)" class="w3-round">
-        <p><b>We are a group of students from George Washington University - Data Analystics Boot Camp 2019.</b></p>
+      <!-- W3.CSS Container -->
+      <div class="w3-light-grey w3-container w3-padding-32" style="margin-top:75px;padding-right:58px">
+        <p class="w3-right"><b>Brought to you by the Fluffy Umbrella Academy© BCMAJ</b></a></p>
       </div>
 
-      <!-- The Team -->
-      <div class="w3-row-padding w3-grayscale">
-        <div class="w3-col m1 w3-margin-bottom"></div>
-        <div class="w3-col m2 w3-margin-bottom">
-          <div class="w3-light-grey">
-            <img src="static\headshot\Alexandra Fenelon - Head Shot 2019.jpg" alt="Alexandra Fenelon"
-              style="width:100%">
-            <div class="w3-container">
-              <h3>Alexandra Fenelon</h3>
-              <a href="url">LinkedIn</a>
-              <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
-            </div>
-          </div>
-        </div>
-        <div class="w3-col m2 w3-margin-bottom">
-          <div class="w3-light-grey">
-            <img src="static\headshot\badr.jpg" alt="Badr" style="width:100%">
-            <div class="w3-container">
-              <h3>Badr Werroll</h3>
-              <a href="url">LinkedIn</a>
-              <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
-            </div>
-          </div>
-        </div>
-        <div class="w3-col m2 w3-margin-bottom">
-          <div class="w3-light-grey">
-            <img src="static\headshot\camila.jpg" alt="Camila Cois" style="width:100%">
-            <div class="w3-container">
-              <h3>Camila Cois</h3>
-              <a href="url">LinkedIn</a>
-              <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
-            </div>
-          </div>
-        </div>
-        <div class="w3-col m2 w3-margin-bottom">
-          <div class="w3-light-grey">
-            <img src="static\headshot\james.jpg" alt="James Tedrow" style="width:100%">
-            <div class="w3-container">
-              <h3>James Tedrow</h3>
-              <a href="url">LinkedIn</a>
-              <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
-            </div>
-          </div>
-        </div>
-        <div class="w3-col m2 w3-margin-bottom">
-          <div class="w3-light-grey">
-            <img src="static\headshot\MuditProfile.png" alt="Mudit Mathur" style="width:100%">
-            <div class="w3-container">
-              <h3>Mudit Mathur</h3>
-              <a href="https://www.linkedin.com/in/mudit-mathur-baa49817b">LinkedIn</a>
-              <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
-            </div>
-          </div>
-        </div>
-        <div class="w3-col m1 w3-margin-bottom"></div>
-      </div>
+      <script>
+        // Script to open and close sidebar
+        function w3_open() {
+          document.getElementById("mySidebar").style.display = "block";
+          document.getElementById("myOverlay").style.display = "block";
+        }
 
-      <!-- End page content -->
-    </div>
+        function w3_close() {
+          document.getElementById("mySidebar").style.display = "none";
+          document.getElementById("myOverlay").style.display = "none";
+        }
 
-    <!-- W3.CSS Container -->
-    <div class="w3-light-grey w3-container w3-padding-32" style="margin-top:75px;padding-right:58px">
-      <p class="w3-right"><b>Brought to you by the Fluffy Umbrella Academy© BCMAJ</b></a></p>
-    </div>
+        // Modal Image Gallery
+        function onClick(element) {
+          document.getElementById("img01").src = element.src;
+          document.getElementById("modal01").style.display = "block";
+          var captionText = document.getElementById("caption");
+          captionText.innerHTML = element.alt;
+        }
+      </script>
 
-    <script>
-      // Script to open and close sidebar
-      function w3_open() {
-        document.getElementById("mySidebar").style.display = "block";
-        document.getElementById("myOverlay").style.display = "block";
-      }
-
-      function w3_close() {
-        document.getElementById("mySidebar").style.display = "none";
-        document.getElementById("myOverlay").style.display = "none";
-      }
-
-      // Modal Image Gallery
-      function onClick(element) {
-        document.getElementById("img01").src = element.src;
-        document.getElementById("modal01").style.display = "block";
-        var captionText = document.getElementById("caption");
-        captionText.innerHTML = element.alt;
-      }
-    </script>
-
-    <script src="https://cdn.plot.ly/plotly-1.31.2.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
-    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/slider.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/slider2.js') }}"></script>
+      <script src="https://cdn.plot.ly/plotly-1.31.2.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
+      <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/slider.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/slider2.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/logic.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/config.js') }}"></script>
 
 
 </body>

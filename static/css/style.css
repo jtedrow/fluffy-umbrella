@@ -1,4 +1,5 @@
-#home {
-    background-image: "static\headshot\james.jpg";
-    background-color: #cccccc;
-   }
+#map,
+body,
+html {
+  height: 100%;
+}
