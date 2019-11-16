@@ -34,6 +34,9 @@ d3.json("/summary/byweek").then((data) => {
         trace.y.push(datum.Total);
         trace.marker.size.push(datum.Positive);
     }
+    console.log(datum["SEASON YEAR"]);
+    console.log(datum.WEEK);
+    console.log(datum.Total);
 
     var test = [];
 
@@ -42,11 +45,14 @@ d3.json("/summary/byweek").then((data) => {
     for (i = 0; i < years.length; i++) {
         var testY = lookup[years[i]];
     }
+    console.log(testY);
+    console.log(years);
 
     // In this case, every year includes every species, so we can just infer the mosType from the *first* year:
-    var firstYear = lookup[years[8]];
+    var firstYear = lookup[years[9]];
     var mosType = Object.keys(firstYear);
-
+    console.log(firstYear);
+    console.log(mosType);
 
     // Create the main traces, one for each species:
     var traces = [];
@@ -65,9 +71,10 @@ d3.json("/summary/byweek").then((data) => {
             mode: 'markers',
             marker: {
                 colorscale: "hot",
-                size: data.marker.size,
+                // size: data.marker.size,
                 sizemode: 'diameter',
-                //   sizeref: 200000
+                sizemin: 5,
+                sizeref: 0.5,
             }
         });
     }
@@ -108,16 +115,29 @@ d3.json("/summary/byweek").then((data) => {
     var layout = {
         xaxis: {
             title: 'Week Tested',
-            range: [15, 45]
+            range: [14, 45],
         },
         yaxis: {
             title: 'Total Mosquitos Tested',
-            type: 'category',
-            autorange: true
+            type: 'linear',
+            rangemode: "normal",
+            autorange: false,
+            range: [-10, 300]
         },
         height: 550,
         showlegend: {
-            itemsizing: "constant"
+            itemsizing: {
+                values: "constant",
+                editType: "legend",
+                useDefaultMarker: "true",
+            },
+            legenditem: {
+                marker: {
+                    size: 20,
+                    symbol: "square",
+                    line: { width: 2, color: "hot" },
+                },
+            },
         },
         hovermode: 'closest',
 
