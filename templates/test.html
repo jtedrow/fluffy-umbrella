@@ -71,8 +71,10 @@
         style="color:rgb(185, 49, 49)">Home</a>
       <a href="#dashboard" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white"
         style="color:rgb(185, 49, 49)">Dashboard</a>
-      <a href="#map" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white"
-        style="color:rgb(185, 49, 49)">Map</a>
+      <a href="#maps" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white"
+        style="color:rgb(185, 49, 49)">Maps</a>
+      <a href="#machine learning" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white"
+        style="color:rgb(185, 49, 49)">Machine Learning</a>
       <a href="#education" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white"
         style="color:rgb(185, 49, 49)">Education</a>
       <a href="#tools" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white"
@@ -97,8 +99,10 @@
 
     <!-- Header -->
     <br>
+
     <div class="jumbotron jumbotron-fluid">
       <div class="container">
+        <h1 class="w3-xxlarge" id="home"></h1>. 
         <h1 class="display-4" style="color:whitesmoke; margin-top: 45%;">West Nile Virus in Chicago</h1>
       </div>
     </div>
@@ -173,7 +177,7 @@
 
     <!--Map-->
     <div class="w3-container" style="margin-top:80px">
-      <h1 class="w3-xxlarge" id="map" w3-text-red style="color:rgb(185, 49, 49);"><b>Map</b></h1>
+      <h1 class="w3-xxlarge" id="maps" w3-text-red style="color:rgb(185, 49, 49);"><b>Maps</b></h1>
       <hr style="width:100px;border:5px solid rgb(185, 49, 49)" class="w3-round">
       <div class='tableauPlaceholder' id='viz1573928563375' style='position: relative'><noscript><a href='#'><img
               alt=' '
@@ -216,9 +220,19 @@
           <param name='filter' value='publish=yes' /></object></div>
       <script
         type='text/javascript'>                    var divElement = document.getElementById('viz1573928728766'); var vizElement = divElement.getElementsByTagName('object')[0]; if (divElement.offsetWidth > 800) { vizElement.style.width = '100%'; vizElement.style.height = (divElement.offsetWidth * 0.75) + 'px'; } else if (divElement.offsetWidth > 500) { vizElement.style.width = '100%'; vizElement.style.height = (divElement.offsetWidth * 0.75) + 'px'; } else { vizElement.style.width = '100%'; vizElement.style.height = '727px'; } var scriptElement = document.createElement('script'); scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js'; vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
-      <!-- Education -->
-      <div class="w3-container" id="education" style="margin-top:80px">
-        <h1 class="w3-xxlarge" style="color:rgb(201, 21, 21);"><b>Education</b></h1>
+          <!-- About -->
+          <div class="w3-container" style="margin-top:80px">
+            <h1 class="w3-xxlarge" id="machine learning" style="color:rgb(201, 21, 21) ;"><b>Machine Learning</b></h1>
+            <hr style="width:100px;border:5px solid rgb(201, 21, 21)" class="w3-round">
+          </div>
+
+
+
+
+
+        <!-- Education -->
+      <div class="w3-container" style="margin-top:80px">
+        <h1 class="w3-xxlarge" id="education" style="color:rgb(201, 21, 21);"><b>Education</b></h1>
         <hr style="width:100px;border:5px solid rgb(201, 21, 21)" class="w3-round">
         <img src="static\images\west-nile-virus-transmission-article.png" alt="West Nile Transmission"
           style="display:block; margin-left:auto; margin-right:auto;" />
@@ -278,9 +292,14 @@
               Like Wyeomyia smithii, the mosquito is a tiny scientific curiosity that poses no threat to humankind.</p>
             </div>
           </div>
+          <br>
+          <img src="static\images\trap.png" style="width: 900px; height:320px; display:block; margin-left:auto; margin-right:auto;" alt="Mosquito Trap" />
+          <br>
           <a href="https://www.cdc.gov/westnile/index.html" class="btn btn"
             style="background-color: #282828; color: white;border-radius: 12px;"><b>Click here for more information
               about the West Nile Virus</b> </a>
+        <br>
+        <br>
         </div>
 
         <!--Tools-->
@@ -327,10 +346,31 @@
               <img src="static\images\d3.png" alt="d3" style="width: 100px; height: 100px;">
             </div>
           </div>
-
+          <div class="w3-col m3 w3-margin-bottom" style="margin-top: 60px;">
+            <div>
+              <img src="static\images\tableau.jpg" alt="tableau" style="width: 100px; height: 100px;">
+            </div>
+          </div>
+          <div class="w3-col m3 w3-margin-bottom" style="margin-top: 60px;">
+            <div>
+              <img src="static\images\scikit.png" alt="scikit" style="width: 100px; height: 100px;">
+            </div>
+          </div>
+          <div class="w3-col m3 w3-margin-bottom" style="margin-top: 60px;">
+            <div>
+              <img src="static\images\plotly.png" alt="heroku" style="width: 100px; height: 100px;">
+            </div>
+          </div>
+          <div class="w3-col m3 w3-margin-bottom" style="margin-top: 60px;">
+            <div>
+              <img src="static\images\heroku.jpg" alt="heroku" style="width: 100px; height: 100px;">
+            </div>
+            <br>
+            <br>
+          </div>
           <!-- About -->
-          <div class="w3-container" id="about" style="margin-top:80px">
-            <h1 class="w3-xxlarge" style="color:rgb(201, 21, 21) ;"><b>About Us</b></h1>
+          <div class="w3-container" style="margin-top:80px">
+            <h1 class="w3-xxlarge" id="about" style="color:rgb(201, 21, 21) ;"><b>About Us</b></h1>
             <hr style="width:100px;border:5px solid rgb(201, 21, 21)" class="w3-round">
             <p><b>We are a group of students from George Washington University - Data Analystics Boot Camp 2019.</b></p>
           </div>
@@ -361,7 +401,7 @@
                 <img src="static\headshot\camila.jpg" alt="Camila Cois" style="width:100%">
                 <div class="w3-container">
                   <h3>Camila Cois</h3>
-                  <a href="https://www.linkedin.com/in/" target="_blank">LinkedIn</a>
+                  <a href="https://www.linkedin.com/in/camilabortolozocois" target="_blank">LinkedIn</a>
                 </div>
               </div>
             </div>
